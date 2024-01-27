@@ -29,7 +29,7 @@ class TinyYOLOv3_onecls(object):
                  device='cuda'):
         self.input_size = input_size
         self.model = Darknet(config_file).to(device)
-        self.model.load_state_dict(torch.load(weight_file))
+        self.model.load_state_dict(torch.load(weight_file, map_location=torch.device(device)))
         self.model.eval()
         self.device = device
 

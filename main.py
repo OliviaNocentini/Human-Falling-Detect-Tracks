@@ -74,7 +74,7 @@ if __name__ == '__main__':
     tracker = Tracker(max_age=max_age, n_init=3)
 
     # Actions Estimate.
-    action_model = TSSTG()
+    action_model = TSSTG(device=device)
 
     resize_fn = ResizePadding(inp_dets, inp_dets)
 

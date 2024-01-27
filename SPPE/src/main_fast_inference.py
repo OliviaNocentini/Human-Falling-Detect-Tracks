@@ -52,12 +52,12 @@ class InferenNet(nn.Module):
 
 
 class InferenNet_fast(nn.Module):
-    def __init__(self, weights_file='./Models/sppe/fast_res101_320x256.pth'):
+    def __init__(self, weights_file='./Models/sppe/fast_res101_320x256.pth', device='cuda'):
         super().__init__()
 
-        self.pyranet = FastPose('resnet101').cuda()
+        self.pyranet = FastPose('resnet101').to(device)
         print('Loading pose model from {}'.format(weights_file))
-        self.pyranet.load_state_dict(torch.load(weights_file))
+        self.pyranet.load_state_dict(torch.load(weights_file, map_location=torch.device(device)))
         self.pyranet.eval()
 
     def forward(self, x):
@@ -68,12 +68,12 @@ class InferenNet_fast(nn.Module):
 
 
 class InferenNet_fastRes50(nn.Module):
-    def __init__(self, weights_file='./Models/sppe/fast_res50_256x192.pth'):
+    def __init__(self, weights_file='./Models/sppe/fast_res50_256x192.pth', device='cuda'):
         super().__init__()
 
-        self.pyranet = FastPose('resnet50', 17).cuda()
+        self.pyranet = FastPose('resnet50', 17).to(device=device)
         print('Loading pose model from {}'.format(weights_file))
-        self.pyranet.load_state_dict(torch.load(weights_file))
+        self.pyranet.load_state_dict(torch.load(weights_file, map_location=torch.device(device)))
         self.pyranet.eval()
 
     def forward(self, x):
